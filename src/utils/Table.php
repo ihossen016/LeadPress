@@ -1,6 +1,6 @@
 <?php
 
-namespace Ismail\LeadPress\App;
+namespace Ismail\LeadPress\Utils;
 
 /**
  * if accessed directly, exit.
