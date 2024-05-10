@@ -1,0 +1,24 @@
+{
+    "name": "ismail/leadpress",
+    "description": "This is a WordPress CRM plugin",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Ismail Hossen",
+            "email": "ihossen016@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ismail\\LeadPress\\": "src/",
+            "Ismail\\LeadPress\\Public\\": "public/"
+        },
+        "files": [
+            "inc/functions.php"
+        ]
+    }
+}
