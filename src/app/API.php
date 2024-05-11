@@ -38,7 +38,7 @@ class API extends Core {
 		register_rest_route( $this->namespace, '/lead/create', [
 			'methods'  				=> [ 'POST' ],
 			'callback' 				=> [ new Lead, 'create_lead' ],
-			'permission_callback' 	=> '__return_true',
+			'permission_callback' 	=> [ $this, 'varify_request' ],
 		] );
 
 		/**
@@ -47,7 +47,7 @@ class API extends Core {
 		register_rest_route( $this->namespace, '/lead/(?P<id>\d+)/edit', [
 			'methods'  				=> [ 'PUT' ],
 			'callback' 				=> [ new Lead, 'edit_lead' ],
-			'permission_callback' 	=> '__return_true',
+			'permission_callback' 	=> [ $this, 'varify_request' ],
 		] );
 
 		/**
@@ -56,7 +56,15 @@ class API extends Core {
 		register_rest_route( $this->namespace, '/lead/(?P<id>\d+)/delete', [
 			'methods'  				=> [ 'DELETE' ],
 			'callback' 				=> [ new Lead, 'delete_lead' ],
-			'permission_callback' 	=> '__return_true',
+			'permission_callback' 	=> [ $this, 'varify_request' ],
 		] );
+	}
+
+	public function varify_request() {
+        $nonce = isset( $_REQUEST[ 'nonce' ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ 'nonce' ] ) ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) return false;
+
+        return true;
 	}
 }
