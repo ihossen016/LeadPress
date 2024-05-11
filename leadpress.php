@@ -108,6 +108,7 @@ final class Plugin {
          */
         $front = new Front( $this->plugin );
         $front->action( 'wp_enqueue_scripts', 'enqueue_scripts', 100 );
+        $front->action( 'wp_footer', 'modal' );
 
         /**
          * Shortcode hooks

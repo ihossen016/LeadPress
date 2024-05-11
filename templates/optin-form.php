@@ -11,5 +11,7 @@
         </label>
     </div>
 
-    <input type="submit" value="<?php _e( 'Subscribe', 'leadpress' ); ?>">
+    <button type="submit" id="leadpress-optin-submit">
+        <?php _e( 'Subscribe', 'leadpress' ); ?>
+    </button>
 </form>

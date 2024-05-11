@@ -43,4 +43,10 @@ class Front extends Core {
 	    wp_localize_script( $this->slug, 'LEADPRESS', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
+	public function modal() {
+		echo '
+		<div id="leadpress-modal" style="display: none">
+			<img id="leadpress-modal-loader" src="' . esc_attr( LEADPRESS_ASSET . '/img/loader.gif' ) . '" />
+		</div>';
+	}
 }
