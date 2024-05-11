@@ -14,6 +14,7 @@
 
 namespace Ismail\LeadPress;
 use Ismail\LeadPress\APP\Admin;
+use Ismail\LeadPress\App\API;
 use Ismail\LeadPress\APP\Front;
 use Ismail\LeadPress\App\Shortcode;
 
@@ -115,6 +116,12 @@ final class Plugin {
          */
         $shortcode = new Shortcode( $this->plugin );
         $shortcode->register( 'leadpress_optin_form', 'show_optin_form' );
+
+        /**
+         * API routes
+         */
+        $api = new API( $this->plugin );
+        $api->action( 'rest_api_init', 'register_routes' );
     }
 
     /**
