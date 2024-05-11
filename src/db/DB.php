@@ -71,4 +71,20 @@ class DB extends Core {
 			dbDelta( $sql );
 		}
 	}
+
+	public function insert( $table, $data ) {
+
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . $table;
+
+		$wpdb->insert( $table_name, $data );
+
+		// Check if the insertion was successful
+		if ( $wpdb->last_error ) {
+			return new \WP_Error( 'database_error', 'Database error occurred.', array( 'status' => 500 ) );
+		}
+
+		return true;
+	}
 }

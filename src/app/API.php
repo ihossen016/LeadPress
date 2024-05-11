@@ -37,7 +37,7 @@ class API extends Core {
 		 */
 		register_rest_route( $this->namespace, '/lead/create', [
 			'methods'  				=> [ 'POST' ],
-			'callback' 				=> [ new Lead, 'create_lead' ],
+			'callback' 				=> [ new Lead( $this->plugin ), 'create_lead' ],
 			'permission_callback' 	=> '__return_true',
 		] );
 
@@ -46,7 +46,7 @@ class API extends Core {
 		 */
 		register_rest_route( $this->namespace, '/lead/(?P<id>\d+)/edit', [
 			'methods'  				=> [ 'PUT' ],
-			'callback' 				=> [ new Lead, 'edit_lead' ],
+			'callback' 				=> [ new Lead( $this->plugin ), 'edit_lead' ],
 			'permission_callback' 	=> '__return_true',
 		] );
 
@@ -55,7 +55,7 @@ class API extends Core {
 		 */
 		register_rest_route( $this->namespace, '/lead/(?P<id>\d+)/delete', [
 			'methods'  				=> [ 'DELETE' ],
-			'callback' 				=> [ new Lead, 'delete_lead' ],
+			'callback' 				=> [ new Lead( $this->plugin ), 'delete_lead' ],
 			'permission_callback' 	=> '__return_true',
 		] );
 	}
