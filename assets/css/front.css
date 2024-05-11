@@ -14,3 +14,27 @@
 #leadpress-modal-loader {
     position: absolute;
 }
+
+.leadpress-optin-message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.leadpress-optin-message p {
+    margin: 0;
+    padding: 0;
+}
+.leadpress-optin-message .leadpress-optin-message-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+.leadpress-optin-message .leadpress-optin-message-icon img {
+    width: 100%;
+    height: auto;
+}
+.leadpress-optin-message.hide {
+    display: none;
+}
