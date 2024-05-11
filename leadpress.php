@@ -17,6 +17,7 @@ use Ismail\LeadPress\APP\Admin;
 use Ismail\LeadPress\App\API;
 use Ismail\LeadPress\APP\Front;
 use Ismail\LeadPress\App\Shortcode;
+use Ismail\LeadPress\DB\DB;
 
 final class Plugin {
 
@@ -103,6 +104,12 @@ final class Plugin {
          */
         $admin = new Admin( $this->plugin );
         $admin->action( 'admin_enqueue_scripts', 'enqueue_scripts', 100 );
+
+        /**
+         * Database hooks
+         */
+        $db = new DB( $this->plugin );
+        $db->activate( 'create_tables' );
         
         /**
          * Frontend hooks
