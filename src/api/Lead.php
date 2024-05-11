@@ -2,6 +2,7 @@
 
 namespace Ismail\LeadPress\Api;
 use Ismail\LeadPress\DB\DB;
+use Ismail\LeadPress\Email\Email;
 
 /**
  * if accessed directly, exit.
@@ -31,19 +32,27 @@ class Lead {
             return $response;
         }
 
-        $result         = $db->insert( 'leadpress_leads', $lead );
+        $row_id         = $db->insert( 'leadpress_leads', $lead );
 
-        if ( is_wp_error( $result ) ) {
+        if ( is_wp_error( $row_id ) ) {
             $response   = [ 
                 'success'   => false,
-                'message'   => $result->get_error_message() 
+                'message'   => $row_id->get_error_message() 
             ];
 
             return $response;
         }
 
+        $email          = new Email();
+        $email_status   = $email->send_instant_mail( 
+            $lead['email'], 
+            __( 'Lead Submission', 'leadpress' ), 
+            __( 'Thank you for subscribing with us', 'leadpress' ) 
+        );
+
         $response       = [
             'success'   => true,
+            'email'     => $email_status,
             'message'   => 'Lead created successfully',
         ];
 

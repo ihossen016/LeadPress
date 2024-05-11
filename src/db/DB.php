@@ -85,7 +85,7 @@ class DB extends Core {
 			return new \WP_Error( 'database_error', 'Database error occurred.', array( 'status' => 500 ) );
 		}
 
-		return true;
+		return $wpdb->insert_id;
 	}
 
 	public function update( $table, $data, $where ) {
