@@ -14,6 +14,8 @@
     <button type="submit" id="leadpress-optin-submit">
         <?php _e( 'Subscribe', 'leadpress' ); ?>
     </button>
+
+    <div class="leadpress-optin-form-message" style="display: none;"></div>
 </form>
 
 <div class="leadpress-optin-message hide">

@@ -46,7 +46,7 @@ class DB extends Core {
 			$sql = "CREATE TABLE $leads_table (
 				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 				name VARCHAR(255) NOT NULL,
-				email VARCHAR(255) NOT NULL,
+				email VARCHAR(255) NOT NULL UNIQUE,
 				time DATETIME DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY  (id)
 			) $charset_collate;";
@@ -86,5 +86,17 @@ class DB extends Core {
 		}
 
 		return true;
+	}
+
+	public function check( $table, $field_name, $field_value ) {
+
+		global $wpdb;
+
+		$table_name  = $wpdb->prefix . $table;
+		$data_exists = $wpdb->get_var( $wpdb->prepare( "SELECT email FROM $table_name WHERE $field_name = %s", $field_value ) );
+
+		if ( $data_exists ) return true;
+		
+		return false;
 	}
 }

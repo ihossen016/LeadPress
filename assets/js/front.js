@@ -28,6 +28,18 @@ jQuery(function ($) {
             success: function (resp) {
                 leadpress_modal(false);
                 console.log(resp);
+
+                if (resp.success) {
+                    $(this).hide();
+
+                    $(".leadpress-optin-message").removeClass("hide");
+                } else {
+                    $(".leadpress-optin-form-message").append(
+                        `<p>${resp.message}</p>`
+                    );
+                    console.log(resp.message);
+                    $(".leadpress-optin-form-message").show();
+                }
             },
             error: function (err) {
                 leadpress_modal(false);

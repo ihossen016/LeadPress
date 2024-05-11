@@ -1,7 +1,6 @@
 <?php
 
 namespace Ismail\LeadPress\Api;
-use Ismail\LeadPress\Base\Core;
 use Ismail\LeadPress\DB\DB;
 
 /**
@@ -11,43 +10,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Lead extends Core {
-
-	public $plugin;
-
-	public $slug;
-
-	public $version;
-
-	/**
-	 * Constructor function
-	 */
-	public function __construct( $plugin ) {
-		$this->plugin		= $plugin;
-		$this->slug			= $this->plugin['TextDomain'];
-		$this->version		= $this->plugin['Version'];
-	}
+class Lead {
 
     public function create_lead( $request ) {
-        $lead = [
-            'name'  => $this->sanitize( $request->get_param( 'name' ) ),
-            'email' => $this->sanitize( $request->get_param( 'email' ) ),
+
+        $lead           = [
+            'name'      => sanitize( $request->get_param( 'name' ) ),
+            'email'     => sanitize( $request->get_param( 'email' ) ),
         ];
 
-        $db = new DB( $this->plugin );
-        $result = $db->insert( 'leadpress_leads', $lead );
+        $db             = new DB( $this->plugin );
+        $email_exists   = $db->check( 'leadpress_leads', 'email', $lead['email'] );
 
-        if ( is_wp_error( $result ) ) {
-            $response = [
-                'success' => false,
-                'error'   => $result->get_error_message(),
+        if ( $email_exists ) {
+            $response   = [ 
+                'success'   => false,
+                'message'   => 'You have already subscribed' 
             ];
 
             return $response;
         }
 
-        $response = [
-            'success' => true,
+        $result         = $db->insert( 'leadpress_leads', $lead );
+
+        if ( is_wp_error( $result ) ) {
+            $response   = [ 
+                'success'   => false,
+                'message'   => $result->get_error_message() 
+            ];
+
+            return $response;
+        }
+
+        $response       = [
+            'success'   => true,
+            'message'   => 'Lead created successfully',
         ];
 
         return $response;
