@@ -88,6 +88,42 @@ class DB extends Core {
 		return true;
 	}
 
+	public function update( $table, $data, $where ) {
+
+		global $wpdb;
+	
+		$table_name = $wpdb->prefix . $table;
+
+		$wpdb->update( $table_name, $data, $where );
+	
+		// Check if the update was unsuccessful
+		if ( $wpdb->last_error ) {
+			return new \WP_Error( 'database_error', 'Database error occurred.', ['status' => 500] );
+		}
+	
+		return true;
+	}
+	
+	public function delete( $table, $id ) {
+
+		global $wpdb;
+	
+		$table_name = $wpdb->prefix . $table;
+		$result 	= $wpdb->delete( $table_name, ['id' => $id] );
+	
+		// Check if the deletion was unsuccessful
+		if ( $wpdb->last_error || $result === false ) {
+			return new \WP_Error( 'database_error', 'Database error occurred.', ['status' => 500] );
+		}
+	
+		// Check if not found rows
+		if ( $result == 0 ) {
+			return new \WP_Error( 'not_found', 'Record not found.', ['status' => 404] );
+		}
+	
+		return true;
+	}
+
 	public function check( $table, $field_name, $field_value ) {
 
 		global $wpdb;
