@@ -1,8 +1,10 @@
 <?php
 
 namespace Ismail\LeadPress\Api;
+
 use Ismail\LeadPress\DB\DB;
 use Ismail\LeadPress\Email\Email;
+use Ismail\LeadPress\Email\EmailLogs;
 
 /**
  * if accessed directly, exit.
@@ -32,23 +34,31 @@ class Lead {
             return $response;
         }
 
-        $row_id         = $db->insert( 'leadpress_leads', $lead );
+        $lead_id        = $db->insert( 'leadpress_leads', $lead );
 
-        if ( is_wp_error( $row_id ) ) {
+        if ( is_wp_error( $lead_id ) ) {
             $response   = [ 
                 'success'   => false,
-                'message'   => $row_id->get_error_message() 
+                'message'   => $lead_id->get_error_message() 
             ];
 
             return $response;
         }
 
         $email          = new Email();
+        $log            = new EmailLogs();
         $email_status   = $email->send_instant_mail( 
             $lead['email'], 
-            __( 'Lead Submission', 'leadpress' ), 
-            __( 'Thank you for subscribing with us', 'leadpress' ) 
+            __( 'LeadPress Subscription', 'leadpress' ), 
+            __( 'Thank you for subscribing with us.', 'leadpress' ) 
         );
+
+        if ( ! $email_status ) {
+            $log->add( $lead_id, 'failed' );
+        }
+        else {
+            $log->add( $lead_id );
+        }
 
         $response       = [
             'success'   => true,
