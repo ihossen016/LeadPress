@@ -27,4 +27,8 @@ class Shortcode extends Core {
 		$this->slug			= $this->plugin['TextDomain'];
 		$this->version		= $this->plugin['Version'];
 	}
+
+	public function show_optin_form() {
+		return Helper::get_template( 'optin-form' );
+	}
 }

@@ -15,6 +15,7 @@
 namespace Ismail\LeadPress;
 use Ismail\LeadPress\APP\Admin;
 use Ismail\LeadPress\APP\Front;
+use Ismail\LeadPress\App\Shortcode;
 
 final class Plugin {
 
@@ -107,6 +108,12 @@ final class Plugin {
          */
         $front = new Front( $this->plugin );
         $front->action( 'wp_enqueue_scripts', 'enqueue_scripts', 100 );
+
+        /**
+         * Shortcode hooks
+         */
+        $shortcode = new Shortcode( $this->plugin );
+        $shortcode->register( 'leadpress_optin_form', 'show_optin_form' );
     }
 
     /**
