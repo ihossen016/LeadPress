@@ -36,8 +36,8 @@ class Front extends Core {
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front.js", LEADPRESS ), [ 'jquery' ], $this->version, true );
 
 	    $localized = [
-	    	'api_base'		=> get_rest_url(),
-	    	'rest_nonce'	=> wp_create_nonce( 'wp_rest' ),
+	    	'api_base'		=> get_rest_url() . 'leadpress/api/v1/',
+	    	'rest_nonce'	=> wp_create_nonce( $this->slug ),
 	    ];
 
 	    wp_localize_script( $this->slug, 'LEADPRESS', apply_filters( "{$this->slug}-localized", $localized ) );

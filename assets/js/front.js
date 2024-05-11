@@ -10,12 +10,29 @@ jQuery(function ($) {
     $("#leadpress-optin-form").on("submit", function (e) {
         e.preventDefault();
 
-        leadpress_modal(true);
+        var form_data = {};
+        $.each($(this).serializeArray(), function (i, field) {
+            form_data[field.name] = field.value;
+        });
 
-        let data = $(this).serialize();
+        leadpress_modal();
 
-        console.log(data);
-
-        leadpress_modal(false);
+        $.ajax({
+            url: `${LEADPRESS.api_base}lead/create`,
+            data: {
+                nonce: LEADPRESS.rest_nonce,
+                ...form_data,
+            },
+            type: "POST",
+            dataType: "json",
+            success: function (resp) {
+                leadpress_modal(false);
+                console.log(resp);
+            },
+            error: function (err) {
+                leadpress_modal(false);
+                console.log(err);
+            },
+        });
     });
 });
