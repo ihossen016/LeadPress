@@ -27,7 +27,7 @@ jQuery(function ($) {
             dataType: "json",
             success: function (resp) {
                 leadpress_modal(false);
-                console.log(resp);
+                // console.log(resp);
 
                 if (resp.success) {
                     $(this).hide();
@@ -37,7 +37,7 @@ jQuery(function ($) {
                     $(".leadpress-optin-form-message").append(
                         `<p>${resp.message}</p>`
                     );
-                    console.log(resp.message);
+
                     $(".leadpress-optin-form-message").show();
                 }
             },
