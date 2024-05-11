@@ -30,7 +30,7 @@ jQuery(function ($) {
                 // console.log(resp);
 
                 if (resp.success) {
-                    $(this).hide();
+                    $("#leadpress-optin-form").hide();
 
                     $(".leadpress-optin-message").removeClass("hide");
                 } else {
