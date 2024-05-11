@@ -106,7 +106,7 @@ final class Plugin {
         $admin->action( 'admin_enqueue_scripts', 'enqueue_scripts', 100 );
 
         /**
-         * Database hooks
+         * Database actions
          */
         $db = new DB( $this->plugin );
         $db->activate( 'create_tables' );
