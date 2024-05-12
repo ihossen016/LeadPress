@@ -50,36 +50,29 @@ class Admin extends Core {
 			'LeadPress',
 			'manage_options',
 			'leadpress',
-			function() { echo '<h1>Custom Plugin</h1>'; },
+			function() {},
 			LEADPRESS_ASSET . '/img/logo.png',
 			5
 		);
 
-		add_submenu_page(
-			'leadpress',
-			__( 'Overview', 'leadpress' ),
-			__( 'Overview', 'leadpress' ),
-			'manage_options',
-			'leadpress',
-			function() {}
-		);
-
-		add_submenu_page(
-			'leadpress',
-			__( 'Leads', 'leadpress' ),
-			__( 'Leads', 'leadpress' ),
-			'manage_options',
-			'leadpress-leads',
-			function() { echo '<h1>Plugin Leads</h1>'; }
-		);
-
-		add_submenu_page(
-			'leadpress',
-			__( 'Email Logs', 'leadpress' ),
-			__( 'Email Logs', 'leadpress' ),
-			'manage_options',
-			'leadpress-email-logs',
-			function() { echo '<h1>Email Logs</h1>'; }
-		);
+		$submenus = [
+			'overview' 		=> __( 'Overview', 'leadpress' ),
+			'leads' 		=> __( 'Leads', 'leadpress' ),
+			'email-logs' 	=> __( 'Email Logs', 'leadpress' ),
+		];
+		
+		// Loop through the submenu array and add each submenu
+		foreach ( $submenus as $slug => $title ) {
+			add_submenu_page(
+				'leadpress',
+				$title,
+				$title,
+				'manage_options',
+				$slug === 'overview' ? 'leadpress' : "leadpress-{$slug}",
+				function() use ( $slug ) {
+					echo Helper::get_template( $slug, 'templates/menus' );
+				}
+			);
+		}
 	}
 }
