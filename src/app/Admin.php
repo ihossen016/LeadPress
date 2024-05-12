@@ -44,4 +44,42 @@ class Admin extends Core {
 	    wp_localize_script( $this->slug, 'LEADPRESS', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
+	public function register_admin_menu() {
+		add_menu_page(
+			__( 'LeadPress', 'leadpress' ),
+			'LeadPress',
+			'manage_options',
+			'leadpress',
+			function() { echo '<h1>Custom Plugin</h1>'; },
+			LEADPRESS_ASSET . '/img/logo.png',
+			5
+		);
+
+		add_submenu_page(
+			'leadpress',
+			__( 'Overview', 'leadpress' ),
+			__( 'Overview', 'leadpress' ),
+			'manage_options',
+			'leadpress',
+			function() {}
+		);
+
+		add_submenu_page(
+			'leadpress',
+			__( 'Leads', 'leadpress' ),
+			__( 'Leads', 'leadpress' ),
+			'manage_options',
+			'leadpress-leads',
+			function() { echo '<h1>Plugin Leads</h1>'; }
+		);
+
+		add_submenu_page(
+			'leadpress',
+			__( 'Email Logs', 'leadpress' ),
+			__( 'Email Logs', 'leadpress' ),
+			'manage_options',
+			'leadpress-email-logs',
+			function() { echo '<h1>Email Logs</h1>'; }
+		);
+	}
 }

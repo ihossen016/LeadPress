@@ -1,0 +1,8 @@
+#adminmenu .wp-menu-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#adminmenu .wp-menu-image img {
+    padding: 0;
+}
