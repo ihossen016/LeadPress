@@ -6,3 +6,14 @@
 #adminmenu .wp-menu-image img {
     padding: 0;
 }
+.leadpress_page_leadpress-email-logs #wpcontent,
+.leadpress_page_leadpress-leads #wpcontent {
+    padding-right: 20px;
+}
+.leadpress_page_leadpress-leads #wpcontent .wp-list-table input:read-only {
+    border: none;
+    background: none;
+    padding: 0;
+    line-height: unset;
+    min-height: unset;
+}
