@@ -7,6 +7,34 @@ let leadpress_modal = (show = true) => {
 };
 
 jQuery(function ($) {
+    // edit lead
+    $(".leadpress-edit").on("click", function () {
+        $(this).hide();
+        $(this).prev().show();
+
+        ["col_name", "col_email"].forEach(element => {
+            $(this)
+                .parent()
+                .parent()
+                .find(`.${element} input`)
+                .attr("disabled", false);
+        });
+    });
+
+    // save lead
+    $(".leadpress-save").on("click", function () {
+        $(this).hide();
+        $(this).next().show();
+
+        ["col_name", "col_email"].forEach(element => {
+            $(this)
+                .parent()
+                .parent()
+                .find(`.${element} input`)
+                .attr("disabled", true);
+        });
+    });
+
     // leadpress csv export
     $("#leadpress-export-leads").on("click", function () {
         console.log("clicked");

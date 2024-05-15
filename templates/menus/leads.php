@@ -13,10 +13,10 @@ $columns = array(
 $data = array(
     array(
         'col_id'    => 1,
-        'col_name'  => '<input type="text" name="col_name" value="John Doe" style="display: none;" /> <span>John Doe</span>',
-        'col_email' => 'john@example.com',
+        'col_name'  => '<input type="text" name="col_name" value="John Doe" disabled />',
+        'col_email' => '<input type="text" name="col_email" value="john@example.com" disabled />',
         'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
+        'col_actions' => '<a href="#" class="leadpress-save" style="display: none;">Save</a> <a href="#" class="leadpress-edit">Edit</a> | <a href="#" class="leadpress-delete">Delete</a>',
     ),
     array(
         'col_id'    => 2,
