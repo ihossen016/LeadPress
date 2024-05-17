@@ -103,6 +103,43 @@ class Lead {
     }
 
     public function delete_lead( $request ) {
-        return ['success' => $request->get_param( 'id' )];
+        $id     = $request->get_param( 'id' ) ? sanitize_text_field( $request->get_param( 'id' ) ) : '';
+
+        if ( ! $id ) {
+            return [
+                'success' => false,
+                'message' => __( 'Invalid ID', 'leadpress' ),
+            ];
+        }
+
+        $db         = new DB( $this->plugin );
+        $logs       = new EmailLogs();
+
+        $log_status = $logs->delete( $id );
+        
+        if ( is_wp_error( $log_status ) ) {
+            return [
+                'success' => false,
+                'message' => $log_status->get_error_message(),
+            ];
+        }
+
+        $result     = $db->delete( 'leadpress_leads', [ 'id' => $id ] );
+
+        if ( is_wp_error( $result ) ) {
+            return [
+                'success' => false,
+                'message' => $result->get_error_message(),
+            ];
+        }
+        
+        // delete previous cache
+        delete_leadpress_cache( 'leads' );
+        delete_leadpress_cache( 'email_logs' );
+
+        return [
+            'success' => true,
+            'message' => __( 'Lead deleted successfully', 'leadpress' ),
+        ];
     }
 }

@@ -55,10 +55,35 @@ jQuery(function ($) {
                 console.log(resp);
             },
             error: function (err) {
+                leadpress_modal(false);
+
                 console.log(err);
             },
-            finally: function () {
+        });
+    });
+
+    // delete lead
+    $(".leadpress-delete").on("click", function () {
+        var id = $(this).data("id");
+
+        leadpress_modal();
+
+        $.ajax({
+            url: `${LEADPRESS.api_base}/lead/${id}/delete`,
+            type: "DELETE",
+            data: {
+                nonce: LEADPRESS.rest_nonce,
+            },
+            success: function (resp) {
                 leadpress_modal(false);
+
+                window.location.reload();
+                // console.log(resp);
+            },
+            error: function (err) {
+                leadpress_modal(false);
+
+                console.log(err);
             },
         });
     });

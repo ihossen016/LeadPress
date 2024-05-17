@@ -104,12 +104,12 @@ class DB extends Core {
 		return true;
 	}
 	
-	public function delete( $table, $id ) {
+	public function delete( $table, $where ) {
 
 		global $wpdb;
 	
 		$table_name = $wpdb->prefix . $table;
-		$result 	= $wpdb->delete( $table_name, ['id' => $id] );
+		$result 	= $wpdb->delete( $table_name, $where );
 	
 		// Check if the deletion was unsuccessful
 		if ( $wpdb->last_error || $result === false ) {

@@ -35,7 +35,7 @@ $data = array_map( function ( $lead ) {
     $email      = '<input type="text" name="col_email" value="' . $lead['email'] . '" disabled />';
     $actions    = '<a href="#" class="leadpress-save" data-id="' . $lead['id'] . '" style="display: none;">'. __( 'Save', 'leadpress' ) .'</a> 
                     <a href="#" class="leadpress-edit">'. __( 'Edit', 'leadpress' ) .'</a> | 
-                    <a href="#" class="leadpress-delete">'. __( 'Delete', 'leadpress' ).'</a>';
+                    <a href="#" class="leadpress-delete" data-id="' . $lead['id'] . '">'. __( 'Delete', 'leadpress' ).'</a>';
 
     return array(
         'col_id'      	=> $lead['id'],

@@ -2,6 +2,8 @@
 
 namespace Ismail\LeadPress\Email;
 
+use Ismail\LeadPress\DB\DB;
+
 /**
  * if accessed directly, exit.
  */
@@ -10,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class EmailLogs {
+
+    public $plugin;
 
     /**
      * Add Email Logs
@@ -66,5 +70,19 @@ class EmailLogs {
         }
 
         return $logs;
+    }
+
+    public static function delete( $lead_id ) {
+        
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . 'leadpress_email_logs';
+        $result     = $wpdb->delete( $table_name, [ 'lead_id' => $lead_id ] );
+
+        if ( is_wp_error( $result ) ) {
+            return $result;
+        }
+
+        return true;
     }
 }
