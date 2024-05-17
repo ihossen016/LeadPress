@@ -34,4 +34,26 @@ class EmailLogs {
 
 		return $wpdb->insert_id;
     }
+
+    public static function get() {
+
+        global $wpdb;
+
+        $query = "SELECT 
+                    e.id, 
+                    l.name, 
+                    l.email, 
+                    e.status, 
+                    e.time 
+                FROM 
+                    {$wpdb->prefix}leadpress_leads l 
+                LEFT JOIN 
+                    {$wpdb->prefix}leadpress_email_logs e 
+                ON 
+                    l.id = e.lead_id";
+
+        $logs = $wpdb->get_results( $query, ARRAY_A );
+
+        return $logs;
+    }
 }
