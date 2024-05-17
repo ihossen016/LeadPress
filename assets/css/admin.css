@@ -18,3 +18,20 @@
     min-height: unset;
     color: inherit;
 }
+.leadpress-mail-status {
+    font-size: 1em;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+.leadpress-mail-status.success {
+    background-color: #008000;
+    color: #ffffff;
+    border-color: #008000;
+}
+.leadpress-mail-status.success {
+    background-color: #ff0000;
+    color: #ffffff;
+    border-color: #ff0000;
+}
