@@ -19,7 +19,9 @@ $columns = [
 ];
 
 $data = array_map( function( $row ) {
-                $status = $row['status'] === 'successful' ? '<span class="leadpress-mail-status success">' . $row['status'] . '</span>' : '<span class="leadpress-mail-status failed">' . $row['status'] . '</span>';
+                $status = $row['status'] === 'sent' ? 
+                            '<span class="leadpress-mail-status success">' . $row['status'] . '</span>' : 
+                            '<span class="leadpress-mail-status failed">' . $row['status'] . '</span>';
 
                 return [
                     'col_id'        => $row['id'],

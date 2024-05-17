@@ -39,20 +39,31 @@ class EmailLogs {
 
         global $wpdb;
 
-        $query = "SELECT 
-                    e.id, 
-                    l.name, 
-                    l.email, 
-                    e.status, 
-                    e.time 
-                FROM 
-                    {$wpdb->prefix}leadpress_leads l 
-                LEFT JOIN 
-                    {$wpdb->prefix}leadpress_email_logs e 
-                ON 
-                    l.id = e.lead_id";
+        $cache_key  = 'leadpress_email_logs';
+        $cache_time = 10 * MINUTE_IN_SECONDS;
+        
+        // get cache data
+        $logs       = get_transient( $cache_key );
+        
+        if ( ! $logs ) {
+            $query  = "SELECT 
+                        e.id, 
+                        l.name, 
+                        l.email, 
+                        e.status, 
+                        e.time 
+                    FROM 
+                        {$wpdb->prefix}leadpress_leads l 
+                    LEFT JOIN 
+                        {$wpdb->prefix}leadpress_email_logs e 
+                    ON 
+                        l.id = e.lead_id";
 
-        $logs = $wpdb->get_results( $query, ARRAY_A );
+            $logs   = $wpdb->get_results( $query, ARRAY_A );
+
+            // set cache
+            set_transient( $cache_key, $logs, $cache_time );
+        }
 
         return $logs;
     }

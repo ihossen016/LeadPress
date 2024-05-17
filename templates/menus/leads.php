@@ -4,7 +4,18 @@ use Ismail\LeadPress\Utils\Table;
 
 global $wpdb;
 
-$leads = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}leadpress_leads", ARRAY_A );
+$cache_key  = 'leadpress_leads_data';
+$cache_time = 10 * MINUTE_IN_SECONDS;
+
+// get cache data
+$leads = get_transient( $cache_key );
+
+if ( ! $leads ) {
+    $leads = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}leadpress_leads", ARRAY_A );
+
+    // set cache
+    set_transient( $cache_key, $leads, $cache_time );
+}
 
 if ( empty( $leads ) ) {
     echo '<p>' . __( 'No leads found', 'leadpress' ) . '</p>';
