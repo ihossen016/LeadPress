@@ -40,7 +40,7 @@ class EmailLogs {
         global $wpdb;
 
         $cache_key  = 'leadpress_email_logs';
-        $cache_time = 10 * MINUTE_IN_SECONDS;
+        $cache_time = MINUTE_IN_SECONDS;
         
         // get cache data
         $logs       = get_transient( $cache_key );
