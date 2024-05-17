@@ -46,10 +46,13 @@ $data = array_map( function ( $lead ) {
     );
 }, $leads );
 
-$custom_table = new Table( $columns, $data );
+$table = new Table( $columns, $data );
+
 ?>
+
 <div class="leadpress-wrap">
-    <h1>Leads Table</h1>
-    <?php $custom_table->display_table(); ?>
+    <h1><?php _e( 'Leads Table', 'leadpress' ); ?></h1>
+    <?php $table->display_table(); ?>
 </div>
+
 <?php
