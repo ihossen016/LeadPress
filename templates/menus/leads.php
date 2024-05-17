@@ -2,6 +2,15 @@
 
 use Ismail\LeadPress\Utils\Table;
 
+global $wpdb;
+
+$leads = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}leadpress_leads", ARRAY_A );
+
+if ( empty( $leads ) ) {
+    echo '<p>' . __( 'No leads found', 'leadpress' ) . '</p>';
+    return;
+}
+
 $columns = array(
     'col_id'      	=> __( 'ID', 'leadpress' ),
     'col_name'    	=> __( 'Name', 'leadpress' ),
@@ -10,93 +19,21 @@ $columns = array(
     'col_actions'  	=> __( 'Actions', 'leadpress' ),
 );
 
-$data = array(
-    array(
-        'col_id'    => 1,
-        'col_name'  => '<input type="text" name="col_name" value="John Doe" disabled />',
-        'col_email' => '<input type="text" name="col_email" value="john@example.com" disabled />',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#" class="leadpress-save" style="display: none;">Save</a> <a href="#" class="leadpress-edit">Edit</a> | <a href="#" class="leadpress-delete">Delete</a>',
-    ),
-    array(
-        'col_id'    => 2,
-        'col_name'  => 'aohn Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 3,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 4,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 5,
-        'col_name'  => 'aohn Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 6,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 7,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 8,
-        'col_name'  => 'aohn Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 9,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 10,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 11,
-        'col_name'  => 'aohn Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    array(
-        'col_id'    => 12,
-        'col_name'  => 'John Doe',
-        'col_email' => 'john@example.com',
-        'col_date'  => '2019-01-01 00:00:00',
-        'col_actions' => '<a href="#">Edit</a> | <a href="#">Delete</a>',
-    ),
-    // Add more rows of data as needed
-);
+$data = array_map( function ( $lead ) {
+    $name       = '<input type="text" name="col_name" value="' . $lead['name'] . '" disabled />';
+    $email      = '<input type="text" name="col_email" value="' . $lead['email'] . '" disabled />';
+    $actions    = '<a href="#" class="leadpress-save" style="display: none;">'. __( 'Save', 'leadpress' ) .'</a> 
+                    <a href="#" class="leadpress-edit">'. __( 'Edit', 'leadpress' ) .'</a> | 
+                    <a href="#" class="leadpress-delete">'. __( 'Delete', 'leadpress' ).'</a>';
+
+    return array(
+        'col_id'      	=> $lead['id'],
+        'col_name'    	=> $name,
+        'col_email'   	=> $email,
+        'col_date'   	=> $lead['time'],
+        'col_actions'  	=> $actions,
+    );
+}, $leads );
 
 $custom_table = new Table( $columns, $data );
 ?>
