@@ -37,7 +37,7 @@ class Admin extends Core {
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin.js", LEADPRESS ), [ 'jquery' ], $this->version, true );
 
 	    $localized = [
-	    	'api_base'		=> get_rest_url() . 'leadpress/api/v1/',
+	    	'api_base'		=> get_rest_url() . 'leadpress/api/v1',
 	    	'rest_nonce'	=> wp_create_nonce( $this->slug ),
 	    ];
 
@@ -74,5 +74,12 @@ class Admin extends Core {
 				}
 			);
 		}
+	}
+
+	public function modal() {
+		echo '
+		<div id="leadpress-modal" style="display: none">
+			<img id="leadpress-modal-loader" src="' . esc_attr( LEADPRESS_ASSET . '/img/loader.gif' ) . '" />
+		</div>';
 	}
 }

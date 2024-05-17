@@ -105,6 +105,7 @@ final class Plugin {
         $admin = new Admin( $this->plugin );
         $admin->action( 'admin_enqueue_scripts', 'enqueue_scripts', 100 );
         $admin->action( 'init', 'register_admin_menu', 0 );
+        $admin->action( 'admin_footer', 'modal' );
 
         /**
          * Database actions

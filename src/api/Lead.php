@@ -15,6 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Lead {
 
+    public $plugin;
+
     public function create_lead( $request ) {
 
         $lead           = [
@@ -69,8 +71,32 @@ class Lead {
         return $response;
     }
 
-    public function edit_lead( $request ) {
-        return ['success' => $request->get_param( 'id' )];
+    public function update_lead( $request ) {
+        $id     = $request->get_param( 'id' ) ? sanitize_text_field( $request->get_param( 'id' ) ) : '';
+        $name   = $request->get_param( 'name' ) ? sanitize_text_field( $request->get_param( 'name' ) ) : '';
+        $email  = $request->get_param( 'email' ) ? sanitize_text_field( $request->get_param( 'email' ) ) : '';
+
+        if ( ! $id ) {
+            return [
+                'success' => false,
+                'message' => __( 'Invalid ID', 'leadpress' ),
+            ];
+        }
+
+        $db     = new DB( $this->plugin );
+        $result = $db->update( 'leadpress_leads', [ 'name' => $name, 'email' => $email ], [ 'id' => $id ] );
+
+        if ( is_wp_error( $result ) ) {
+            return [
+                'success' => false,
+                'message' => $result->get_error_message(),
+            ];
+        }
+
+        return [
+            'success' => true,
+            'message' => __( 'Lead updated successfully', 'leadpress' ),
+        ];
     }
 
     public function delete_lead( $request ) {

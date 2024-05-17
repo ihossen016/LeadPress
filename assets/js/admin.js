@@ -33,6 +33,34 @@ jQuery(function ($) {
                 .find(`.${element} input`)
                 .attr("disabled", true);
         });
+
+        // update lead
+        var id = $(this).data("id");
+        var name = $(this).parent().parent().find(".col_name input").val();
+        var email = $(this).parent().parent().find(".col_email input").val();
+
+        leadpress_modal();
+
+        $.ajax({
+            url: `${LEADPRESS.api_base}/lead/${id}/update`,
+            type: "PUT",
+            data: {
+                nonce: LEADPRESS.rest_nonce,
+                name: name,
+                email: email,
+            },
+            success: function (resp) {
+                leadpress_modal(false);
+
+                console.log(resp);
+            },
+            error: function (err) {
+                console.log(err);
+            },
+            finally: function () {
+                leadpress_modal(false);
+            },
+        });
     });
 
     // leadpress csv export

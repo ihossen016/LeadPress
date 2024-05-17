@@ -42,11 +42,11 @@ class API extends Core {
 		] );
 
 		/**
-		 * Edit Lead
+		 * Update Lead
 		 */
-		register_rest_route( $this->namespace, '/lead/(?P<id>\d+)/edit', [
+		register_rest_route( $this->namespace, '/lead/(?P<id>\d+)/update', [
 			'methods'  				=> [ 'PUT' ],
-			'callback' 				=> [ new Lead, 'edit_lead' ],
+			'callback' 				=> [ new Lead, 'update_lead' ],
 			'permission_callback' 	=> '__return_true',
 		] );
 

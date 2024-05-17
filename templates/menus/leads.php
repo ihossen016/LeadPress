@@ -33,7 +33,7 @@ $columns = array(
 $data = array_map( function ( $lead ) {
     $name       = '<input type="text" name="col_name" value="' . $lead['name'] . '" disabled />';
     $email      = '<input type="text" name="col_email" value="' . $lead['email'] . '" disabled />';
-    $actions    = '<a href="#" class="leadpress-save" style="display: none;">'. __( 'Save', 'leadpress' ) .'</a> 
+    $actions    = '<a href="#" class="leadpress-save" data-id="' . $lead['id'] . '" style="display: none;">'. __( 'Save', 'leadpress' ) .'</a> 
                     <a href="#" class="leadpress-edit">'. __( 'Edit', 'leadpress' ) .'</a> | 
                     <a href="#" class="leadpress-delete">'. __( 'Delete', 'leadpress' ).'</a>';
 

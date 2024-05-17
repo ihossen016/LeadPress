@@ -1,3 +1,20 @@
+#leadpress-modal {
+    position: fixed;
+    background: #c8c8c859;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#leadpress-modal-loader {
+    position: absolute;
+}
+
 #adminmenu .wp-menu-image {
     display: flex;
     justify-content: center;
