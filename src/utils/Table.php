@@ -94,15 +94,6 @@ class Table extends \WP_List_Table {
 
     // Define what will be displayed in each column
     public function column_default( $item, $column_name ) {
-        switch ( $column_name ) {
-            case 'col_id':
-            case 'col_name':
-            case 'col_email':
-            case 'col_date':
-            case 'col_actions':
-                return $item[$column_name];
-            default:
-                return print_r( $item, true ); // Show the whole array for troubleshooting purposes
-        }
+        return isset( $item[ $column_name ] ) ? $item[ $column_name ] : print_r( $item, true );
     }
 }

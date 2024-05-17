@@ -16,7 +16,7 @@ class EmailLogs {
      *
      * @return void
      */
-    public static function add( $lead_id, $status = 'successful' ) {
+    public static function add( $lead_id, $status = 'sent' ) {
 
         global $wpdb;
 
