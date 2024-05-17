@@ -4,7 +4,7 @@ use Ismail\LeadPress\Utils\Table;
 
 global $wpdb;
 
-$cache_key  = 'leadpress_leads_data';
+$cache_key  = 'leadpress_leads';
 $cache_time = MINUTE_IN_SECONDS;
 
 // get cache data

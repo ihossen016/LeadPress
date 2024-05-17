@@ -92,6 +92,9 @@ class Lead {
                 'message' => $result->get_error_message(),
             ];
         }
+        
+        // delete previous cache
+        delete_leadpress_cache( 'leads' );
 
         return [
             'success' => true,
