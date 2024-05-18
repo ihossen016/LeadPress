@@ -24,8 +24,7 @@ class Front extends Core {
 	public function __construct( $plugin ) {
 		$this->plugin		= $plugin;
 		$this->slug			= $this->plugin['TextDomain'];
-		// $this->version		= $this->plugin['Version'];
-		$this->version		= time();
+		$this->version		= $this->plugin['Version'];
 	}
 
 	/**
