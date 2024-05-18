@@ -154,7 +154,6 @@ class Lead {
         global $wpdb;
         
         $fields = json_decode( $request->get_param( 'fields' ) );
-        update_option( 'fieldssss', $fields );
         $query  = "SELECT " . implode( ', ', $fields ) . " FROM {$wpdb->prefix}leadpress_leads";
         $leads  = $wpdb->get_results( $query, ARRAY_A );
 
