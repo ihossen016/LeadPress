@@ -18,7 +18,9 @@ if ( ! $leads ) {
 }
 
 if ( empty( $leads ) ) {
-    echo '<p>' . __( 'No leads found', 'leadpress' ) . '</p>';
+
+    echo Helper::get_template( 'not-found', 'templates/menus' );
+
     return;
 }
 

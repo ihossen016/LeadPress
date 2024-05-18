@@ -52,3 +52,42 @@
     color: #ffffff;
     border-color: #ff0000;
 }
+
+/* not found */
+#leadpress-not-found {
+    width: 100%;
+    height: 100%;
+}
+#leadpress-not-found .empty-state {
+    width: 750px;
+    margin: 40px auto;
+    background: #fff;
+    box-shadow: 1px 2px 10px #e1e3ec;
+    border-radius: 4px;
+}
+#leadpress-not-found .empty-state__content {
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#leadpress-not-found .empty-state__content .empty-state__icon {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: 200px;
+    justify-content: center;
+    background-color: #f7fafc;
+    box-shadow: 0px 2px 1px #e1e3ec;
+}
+#leadpress-not-found .empty-state__content .empty-state__icon img {
+    width: 170px;
+}
+#leadpress-not-found .empty-state__content .empty-state__message {
+    color: #38a169;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.85rem;
+}

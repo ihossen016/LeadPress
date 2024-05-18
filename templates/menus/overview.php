@@ -1,4 +1,5 @@
 <?php
+use Ismail\LeadPress\Public\Helper;
 
 ?>
 
