@@ -49,10 +49,17 @@ class Lead {
 
         $email          = new Email();
         $log            = new EmailLogs();
-        $email_status   = $email->send_instant_mail( 
+        $email_status   = $email->send_mail( 
             $lead['email'], 
             __( 'LeadPress Subscription', 'leadpress' ), 
             __( 'Thank you for subscribing with us.', 'leadpress' ) 
+        );
+
+        $email->schedule_mail( 
+            $lead_id,
+            $lead['email'], 
+            __( 'LeadPress Subscription ', 'leadpress' ), 
+            __( 'This is your subscription mail.', 'leadpress' ) 
         );
 
         if ( ! $email_status ) {

@@ -2,6 +2,8 @@
 
 namespace Ismail\LeadPress\App;
 use Ismail\LeadPress\Base\Core;
+use Ismail\LeadPress\Email\Email;
+use Ismail\LeadPress\Email\EmailLogs;
 use Ismail\LeadPress\Public\Helper;
 
 /**
@@ -81,5 +83,19 @@ class Admin extends Core {
 		<div id="leadpress-modal" style="display: none">
 			<img id="leadpress-modal-loader" src="' . esc_attr( LEADPRESS_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
+	}
+
+	public function send_scheduled_mail( $lead_id, $to, $subject, $body ) {
+		$email 			= new Email();
+        $log          	= new EmailLogs();
+
+		$email_status 	= $email->send_mail( $to, $subject, $body );
+
+        if ( ! $email_status ) {
+            $log->add( $lead_id, 'failed' );
+        }
+        else {
+            $log->add( $lead_id );
+        }
 	}
 }

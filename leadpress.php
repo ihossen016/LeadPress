@@ -141,6 +141,7 @@ final class Plugin {
         $admin->action( 'admin_enqueue_scripts', 'enqueue_scripts', 100 );
         $admin->action( 'init', 'register_admin_menu', 0 );
         $admin->action( 'admin_footer', 'modal' );
+        $admin->action( 'leadpress_schedule_email', 'send_scheduled_mail', 10, 4 );
 
         /**
          * Database actions
