@@ -55,7 +55,7 @@ class EmailLogs {
                         l.name, 
                         l.email, 
                         e.status, 
-                        e.time 
+                        e.date 
                     FROM 
                         {$wpdb->prefix}leadpress_leads l 
                     LEFT JOIN 

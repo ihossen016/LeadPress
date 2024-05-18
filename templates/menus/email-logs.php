@@ -2,6 +2,7 @@
 
 use Ismail\LeadPress\Email\EmailLogs;
 use Ismail\LeadPress\Utils\Table;
+use Ismail\LeadPress\Public\Helper;
 
 $logs = EmailLogs::get();
 
@@ -28,7 +29,7 @@ $data = array_map( function( $row ) {
                     'col_name'      => $row['name'],
                     'col_email'     => $row['email'],
                     'col_status'    => $status,
-                    'col_date'      => $row['time'],
+                    'col_date'      => $row['date'],
                 ];
             }, 
             $logs 

@@ -150,12 +150,23 @@ class Lead {
         ];
     }
 
-    public function export_leads( $request ) {
-        $fields = $request->get_param( 'fields' ) ? json_decode( $request->get_param( 'fields' ) ) : '';
+    public function export_leads( $request ) {        
+        global $wpdb;
+        
+        $fields = json_decode( $request->get_param( 'fields' ) );
+        update_option( 'fieldssss', $fields );
+        $query  = "SELECT " . implode( ', ', $fields ) . " FROM {$wpdb->prefix}leadpress_leads";
+        $leads  = $wpdb->get_results( $query, ARRAY_A );
+
+        // convert array to csv format
+        $csv    = [ array_map( 'ucfirst', $fields ) ];
+        $csv    = array_merge( $csv, array_map( function( $entry ) use ( $fields ) {
+            return array_values( array_intersect_key( $entry, array_flip( $fields ) ) );
+        }, $leads ) );
 
         return [
             'success'   => true,
-            'data'      => $fields,
+            'data'      => $csv,
         ];
     }
 }

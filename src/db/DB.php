@@ -47,7 +47,7 @@ class DB extends Core {
 				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 				name VARCHAR(255) NOT NULL,
 				email VARCHAR(255) NOT NULL UNIQUE,
-				time DATETIME DEFAULT CURRENT_TIMESTAMP,
+				date DATETIME DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -63,7 +63,7 @@ class DB extends Core {
 				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 				lead_id BIGINT(20) UNSIGNED NOT NULL,
 				status VARCHAR(255) NOT NULL,
-				time DATETIME DEFAULT CURRENT_TIMESTAMP,
+				date DATETIME DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY  (id),
 				FOREIGN KEY (lead_id) REFERENCES $leads_table(id)
 			) $charset_collate;";

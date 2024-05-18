@@ -1,6 +1,7 @@
 <?php
 
 use Ismail\LeadPress\Utils\Table;
+use Ismail\LeadPress\Public\Helper;
 
 global $wpdb;
 
@@ -41,7 +42,7 @@ $data = array_map( function ( $lead ) {
         'col_id'      	=> $lead['id'],
         'col_name'    	=> $name,
         'col_email'   	=> $email,
-        'col_date'   	=> $lead['time'],
+        'col_date'   	=> $lead['date'],
         'col_actions'  	=> $actions,
     );
 }, $leads );
@@ -61,7 +62,7 @@ $table = new Table( $columns, $data );
                     <option value="id"><?php esc_html_e( 'ID', 'leadpress' ); ?></option>
                     <option value="name"><?php esc_html_e( 'Name', 'leadpress' ); ?></option>
                     <option value="email"><?php esc_html_e( 'Email', 'leadpress' ); ?></option>
-                    <option value="time"><?php esc_html_e( 'Date', 'leadpress' ); ?></option>
+                    <option value="date"><?php esc_html_e( 'Date', 'leadpress' ); ?></option>
                 </select>
             </div>
 

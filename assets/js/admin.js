@@ -98,7 +98,10 @@ jQuery(function ($) {
     // leadpress csv export
     $("#leadpress-export-leads").on("click", function () {
         var data = $(".leadpress-export-options").val();
-        console.log(data);
+
+        if (data.length === 0) {
+            data = ["id", "name", "email", "date"];
+        }
 
         leadpress_modal();
 
@@ -112,7 +115,9 @@ jQuery(function ($) {
             success: function (resp) {
                 leadpress_modal(false);
 
-                console.log(resp);
+                // console.log(resp);
+
+                download_csv(resp.data, "leads");
             },
             error: function (err) {
                 leadpress_modal(false);
@@ -120,24 +125,21 @@ jQuery(function ($) {
                 console.log(err);
             },
         });
-
-        // const rows = [
-        //     ["Name", "Email", "Date"],
-        //     ["John", "Doe", "2020-01-01"],
-        //     ["Jane", "Doe", "2020-01-02"],
-        //     ["Joe", "Doe", "2020-01-03"],
-        // ];
-
-        // let csvContent =
-        //     "data:text/csv;charset=utf-8," +
-        //     rows.map(e => e.join(",")).join("\n");
-
-        // var encodedUri = encodeURI(csvContent);
-        // var link = document.createElement("a");
-        // link.setAttribute("href", encodedUri);
-        // link.setAttribute("download", "leadpress_leads.csv");
-        // document.body.appendChild(link); // Required for FF
-
-        // link.click();
     });
 });
+
+function download_csv(csv_data, filename) {
+    let csvContent =
+        "data:text/csv;charset=utf-8," +
+        csv_data.map(e => e.join(",")).join("\n");
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `${filename}.csv`);
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+}
