@@ -41,7 +41,12 @@ final class Plugin {
      * @return void
      */
     public function __construct() {
-        
+        		
+		/**
+		 * Check for action scheduler tables
+		 */
+		register_activation_hook( __FILE__, [ $this, '__invoke' ] );
+
         // Include files
         $this->include();
 
@@ -51,6 +56,35 @@ final class Plugin {
         // Run all the hooks
         $this->hooks();
     }
+
+	/**
+	 * Check for action scheduler tables before activation
+	 */
+	public function __invoke() {
+
+		$table_report = leadpress_check_action_tables();
+
+		// check for missing tables
+		if( in_array( true, $table_report ) ) :
+
+			// check store table
+			if( $table_report['store_table_missing'] ) :
+				delete_option( 'schema-ActionScheduler_StoreSchema' );
+
+				$action_store_db 	= new \ActionScheduler_DBStore();
+				$action_store_db->init();
+			endif;
+
+			// check log table
+			if( $table_report['log_table_missing'] ) :
+				delete_option( 'schema-ActionScheduler_LoggerSchema' );
+
+				$action_log_db 		= new \ActionScheduler_DBLogger();
+				$action_log_db->init();
+			endif;
+
+		endif;
+	}
 
     /**
      * Include files
@@ -63,6 +97,7 @@ final class Plugin {
      */
     private function include() {
 		require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
+		require_once( dirname( __FILE__ ) . '/libraries/action-scheduler/action-scheduler.php' );
         require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	}
 
