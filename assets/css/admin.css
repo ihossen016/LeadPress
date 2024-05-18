@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap");
+
 #leadpress-modal {
     position: fixed;
     background: #c8c8c859;
@@ -68,6 +70,45 @@
 }
 .leadpress-export .leadpress-export-options-wrap .leadpress-export-options {
     width: 100%;
+}
+.toplevel_page_leadpress #wpbody-content {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+.leadpress-overview-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.leadpress-overview-wrapper .leadpress-overview {
+    width: 750px;
+    background: #fff;
+    box-shadow: 1px 2px 10px #ffcc5a;
+    border-radius: 16px;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.leadpress-overview-wrapper h1 {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+    font-family: "Poetsen One", sans-serif;
+    font-size: 120px;
+    font-weight: 400;
+    font-style: normal;
+    background: linear-gradient(45deg, #f749b2, #ffe000 80%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* not found */
