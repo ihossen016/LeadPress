@@ -1,26 +1,38 @@
 # LeadPress
 
-This is a simple CRM plugin for WordPress
+This is a CRM plugin for WordPress
 
 ## Installation
 
-All you need to do is clone this plugin into your `wp-content/plugins` folder of your site or you can download this plugin and paste it into your `wp-content/plugins` folder.
+-   First clone this repo inside your `wp-content/plugins` folder
 
 ```
 git clone https://github.com/ihossen016/server-side-pagination.git
 ```
 
+-   Then navigate into the `leadpress` folder
+
+```
+cd leadpress
+```
+
+-   Now run the below command to install the packages
+
+```
+composer update
+```
+
 ## Usages
 
--   Now navigate to your plugins page you will find the `LeadPress` plugin in your plugins list, activate it.
+-   To use this plugin navigate to your plugins page in your admin dashboard and you will find the `LeadPress` plugin in your plugins list, activate it.
 
 ![LeadPress Plugin](assets/img/plugin.png)
 
--   After activating the plugin you'll find an admin menu on the left side.
+-   After activating the plugin you'll find a new admin menu named `LeadPress` on the left side.
 
 ![Admin Menu](assets/img/admin-menu.png)
 
--   Now to use the optin form copy the shortcode and paste it into the page where you want to show it.
+-   To use the optin form copy the shortcode and paste it into the page where you want to show it.
 
 ```
 [leadpress_optin_form]
