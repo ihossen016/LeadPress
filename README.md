@@ -12,7 +12,7 @@ git clone https://github.com/ihossen016/server-side-pagination.git
 
 ## Usages
 
--   Now navigate to your plugins page you will find the `LeadPress` plugin in your plugins list, activate it.
+-   Now navigate to your plugins page you will find the **LeadPress** plugin in your plugins list, activate it.
 
 ![LeadPress Plugin](assets/img/plugin.png)
 
@@ -26,6 +26,6 @@ If you encounter any issues or have questions about this plugin, please feel fre
 
 ## Author
 
-`LeadPress` is maintained by [Ismail Hossen](https://github.com/ihossen016).
+**LeadPress** is maintained by [Ismail Hossen](https://github.com/ihossen016).
 
-Thank you for using `LeadPress`!
+Thank you for using **LeadPress**!
