@@ -52,6 +52,23 @@
     color: #ffffff;
     border-color: #ff0000;
 }
+.leadpress-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leadpress-export {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 10px;
+}
+.leadpress-export .leadpress-export-options-wrap {
+    width: 400px;
+}
+.leadpress-export .leadpress-export-options-wrap .leadpress-export-options {
+    width: 100%;
+}
 
 /* not found */
 #leadpress-not-found {

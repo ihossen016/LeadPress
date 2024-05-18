@@ -18,9 +18,7 @@ if ( ! $leads ) {
 }
 
 if ( empty( $leads ) ) {
-
     echo Helper::get_template( 'not-found', 'templates/menus' );
-
     return;
 }
 
@@ -49,12 +47,27 @@ $data = array_map( function ( $lead ) {
 }, $leads );
 
 $table = new Table( $columns, $data );
-
 ?>
 
 <div class="leadpress-wrap">
-    <h1><?php _e( 'Leads Table', 'leadpress' ); ?></h1>
+    <div class="leadpress-table-header">
+        <h1><?php _e( 'Leads Table', 'leadpress' ); ?></h1>
+
+        <div class="leadpress-export">
+            <div class="leadpress-export-options-wrap">
+                <h3><?php _e( 'Export Leads: ', 'leadpress' ); ?></h3>
+                <select class="leadpress-export-options" name="states[]" multiple="multiple">
+                    <option></option>
+                    <option value="id"><?php esc_html_e( 'ID', 'leadpress' ); ?></option>
+                    <option value="name"><?php esc_html_e( 'Name', 'leadpress' ); ?></option>
+                    <option value="email"><?php esc_html_e( 'Email', 'leadpress' ); ?></option>
+                    <option value="time"><?php esc_html_e( 'Date', 'leadpress' ); ?></option>
+                </select>
+            </div>
+
+            <button class="button button-secondary" id="leadpress-export-leads"><?php esc_html_e( 'Export', 'leadpress' ); ?></button>
+        </div>
+    </div>
+
     <?php $table->display_table(); ?>
 </div>
-
-<?php

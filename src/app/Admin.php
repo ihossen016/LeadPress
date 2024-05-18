@@ -37,10 +37,19 @@ class Admin extends Core {
 	public function enqueue_scripts() {
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin.css", LEADPRESS ), '', $this->version, 'all' );
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin.js", LEADPRESS ), [ 'jquery' ], $this->version, true );
+		
+		// enqueue select2
+		$screen = get_current_screen();
+
+		if ( $screen->id === 'leadpress_page_leadpress-leads' ) {
+			wp_enqueue_style( $this->slug . '-select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', '', $this->version, 'all' );
+			wp_enqueue_script( $this->slug . '-select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', [ 'jquery' ], $this->version, true );
+		}
 
 	    $localized = [
 	    	'api_base'		=> get_rest_url() . 'leadpress/api/v1',
 	    	'rest_nonce'	=> wp_create_nonce( $this->slug ),
+	    	's_placeholder'	=> __( 'Select fields to include.', 'leadpress' ),
 	    ];
 
 	    wp_localize_script( $this->slug, 'LEADPRESS', apply_filters( "{$this->slug}-localized", $localized ) );

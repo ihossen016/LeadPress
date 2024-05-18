@@ -6,7 +6,7 @@ use Ismail\LeadPress\Utils\Table;
 $logs = EmailLogs::get();
 
 if ( empty( $logs ) ) {
-    echo '<p>' . __( 'No logs found', 'leadpress' ) . '</p>';
+    echo Helper::get_template( 'not-found', 'templates/menus' );
     return;
 }
 
@@ -39,6 +39,6 @@ $table = new Table( $columns, $data );
 ?>
 
 <div class="leadpress-wrap">
-    <h1>Email Logs</h1>
+    <h1><?php _e( 'Email Logs', 'leadpress' ); ?></h1>
     <?php $table->display_table(); ?>
 </div>
