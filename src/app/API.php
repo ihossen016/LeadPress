@@ -58,13 +58,24 @@ class API extends Core {
 			'callback' 				=> [ new Lead, 'delete_lead' ],
 			'permission_callback' 	=> '__return_true',
 		] );
+
+		/**
+		 * Export Leads
+		 */
+		register_rest_route( $this->namespace, '/leads/export', [
+			'methods'  				=> [ 'POST' ],
+			'callback' 				=> [ new Lead, 'export_leads' ],
+			'permission_callback' 	=> '__return_true',
+		] );
 	}
 
-	public function varify_request() {
-        $nonce = isset( $_REQUEST[ 'nonce' ] ) ? sanitize_text_field( $_REQUEST[ 'nonce' ] ) : '';
+	public function verify_request() {
+		$nonce = isset( $_REQUEST['nonce'] ) ? $_REQUEST['nonce'] : '';
 
-		if ( ! wp_verify_nonce( $_REQUEST[ 'nonce' ], $this->slug ) ) return false;
-
-        return true;
+		if ( ! wp_verify_nonce( $nonce, $this->slug ) ) {
+			return false;
+		}
+	
+		return true;
 	}
 }

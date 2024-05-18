@@ -100,6 +100,27 @@ jQuery(function ($) {
         var data = $(".leadpress-export-options").val();
         console.log(data);
 
+        leadpress_modal();
+
+        $.ajax({
+            url: `${LEADPRESS.api_base}/leads/export`,
+            type: "POST",
+            data: {
+                nonce: LEADPRESS.rest_nonce,
+                fields: JSON.stringify(data),
+            },
+            success: function (resp) {
+                leadpress_modal(false);
+
+                console.log(resp);
+            },
+            error: function (err) {
+                leadpress_modal(false);
+
+                console.log(err);
+            },
+        });
+
         // const rows = [
         //     ["Name", "Email", "Date"],
         //     ["John", "Doe", "2020-01-01"],

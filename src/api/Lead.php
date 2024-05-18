@@ -149,4 +149,13 @@ class Lead {
             'message' => __( 'Lead deleted successfully', 'leadpress' ),
         ];
     }
+
+    public function export_leads( $request ) {
+        $fields = $request->get_param( 'fields' ) ? json_decode( $request->get_param( 'fields' ) ) : '';
+
+        return [
+            'success'   => true,
+            'data'      => $fields,
+        ];
+    }
 }
