@@ -20,6 +20,12 @@ git clone https://github.com/ihossen016/server-side-pagination.git
 
 ![Admin Menu](assets/img/admin-menu.png)
 
+-   Now to use the optin form copy the shortcode and paste it into the page where you want to show it.
+
+```
+[leadpress_optin_form]
+```
+
 ## Issues
 
 If you encounter any issues or have questions about this plugin, please feel free to [open an issue](https://github.com/ihossen016/LeadPress/issues) on GitHub.
