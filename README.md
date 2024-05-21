@@ -13,7 +13,7 @@ git clone https://github.com/ihossen016/LeadPress.git
 -   Then navigate into the `leadpress` folder
 
 ```
-cd leadpress
+cd LeadPress  
 ```
 
 -   Now run the below command to install the packages
