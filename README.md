@@ -7,7 +7,7 @@ This is a CRM plugin for WordPress
 -   First clone this repo inside your `wp-content/plugins` folder
 
 ```
-git clone https://github.com/ihossen016/server-side-pagination.git
+git clone https://github.com/ihossen016/LeadPress.git
 ```
 
 -   Then navigate into the `leadpress` folder
